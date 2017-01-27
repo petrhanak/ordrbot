@@ -852,10 +852,6 @@ function sendListTemplate(recipientId) {
                   "title": "Objednat za 140 Kč",
                   "type": "postback",
                   "payload": "order glaz. kure"
-                }, {
-                  "title": "Více porcí",
-                  "type": "postback",
-                  "payload": "order glaz. kure multi"
                 }
               ],
             },
@@ -868,10 +864,6 @@ function sendListTemplate(recipientId) {
                   "title": "Objednat za 150 Kč",
                   "type": "postback",
                   "payload": "order glaz. kure"
-                }, {
-                  "title": "Více porcí",
-                  "type": "postback",
-                  "payload": "order glaz. kure multi"
                 }
               ]
             }, {
@@ -882,10 +874,6 @@ function sendListTemplate(recipientId) {
                   "title": "Objednat za 60 Kč",
                   "type": "postback",
                   "payload": "order kokodort"
-                }, {
-                  "title": "Více kusů",
-                  "type": "postback",
-                  "payload": "order kokodort multi"
                 }
               ]
             }
