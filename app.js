@@ -841,6 +841,7 @@ function sendListTemplate(recipientId) {
         type: "template",
         payload: {
           template_type: "list",
+          top_element_style: "compact",
           elements: [
             {
               "title": "Sečuánské kuře s nudlemi",
