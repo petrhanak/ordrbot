@@ -849,11 +849,15 @@ function sendListTemplate(recipientId) {
               "subtitle": "Kuřecí prsa nakrájíme na kousky, marinujeme v česneku, zázvoru a sojové omáčce. Kuře orestujeme, přidáme nakrájenou zeleninu, dochutíme vinným octem, medem a posypeme opraženými arašídy.Podáváme se salátkem z mrkve, okurek a jarních klíčků.",
               "buttons": [
                 {
-                  "title": "Objednat za 150 Kč",
+                  "title": "Objednat za 140 Kč",
                   "type": "postback",
                   "payload": "order glaz. kure"
+                }, {
+                  "title": "Více porcí",
+                  "type": "postback",
+                  "payload": "order glaz. kure multi"
                 }
-              ]
+              ],
             },
             {
               "title": "Glazírované kuřecí kousky s bok choy a jasmínovou rýží s mátou",
@@ -864,6 +868,24 @@ function sendListTemplate(recipientId) {
                   "title": "Objednat za 150 Kč",
                   "type": "postback",
                   "payload": "order glaz. kure"
+                }, {
+                  "title": "Více porcí",
+                  "type": "postback",
+                  "payload": "order glaz. kure multi"
+                }
+              ]
+            }, {
+              "title": "Kokosovo-jahodový raw dortík",
+              "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-de2a54b5-7b4e-4bb2-815d-07d47558e1b4.jpeg",
+              "buttons": [
+                {
+                  "title": "Objednat za 60 Kč",
+                  "type": "postback",
+                  "payload": "order kokodort"
+                }, {
+                  "title": "Více kusů",
+                  "type": "postback",
+                  "payload": "order kokodort multi"
                 }
               ]
             }
