@@ -848,12 +848,9 @@ function sendListTemplate(recipientId) {
               "subtitle": "Kuřecí prsa nakrájíme na kousky, marinujeme v česneku, zázvoru a sojové omáčce. Kuře orestujeme, přidáme nakrájenou zeleninu, dochutíme vinným octem, medem a posypeme opraženými arašídy.Podáváme se salátkem z mrkve, okurek a jarních klíčků.",
               "buttons": [
                 {
-                  "title": "Objednat za 140 Kč",
-                  "type": "web_url",
-                  "url": "https://www.ordr.cz/nase-jidla/detail/1347",
-                  "messenger_extensions": true,
-                  "webview_height_ratio": "tall",
-                  "fallback_url": "https://www.ordr.cz/"
+                  "title": "Objednat za 150 Kč",
+                  "type": "postback",
+                  "payload": "order glaz. kure"
                 }
               ]
             },
@@ -864,11 +861,8 @@ function sendListTemplate(recipientId) {
               "buttons": [
                 {
                   "title": "Objednat za 150 Kč",
-                  "type": "web_url",
-                  "url": "https://www.ordr.cz/nase-jidla/detail/1347",
-                  "messenger_extensions": true,
-                  "webview_height_ratio": "tall",
-                  "fallback_url": "https://www.ordr.cz/"
+                  "type": "postback",
+                  "payload": "order glaz. kure"
                 }
               ]
             }
