@@ -255,6 +255,10 @@ function receivedMessage(event) {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
     switch (messageText) {
+      case 'list':
+        sendListTemplate(senderID);
+        break;
+
       case 'image':
         sendImageMessage(senderID);
         break;
@@ -826,6 +830,63 @@ function callSendAPI(messageData) {
     }
   });  
 }
+
+function sendListTemplate(recipientId) {
+  const messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          elements: [
+            {
+              "title": "Sečuánské kuře s nudlemi",
+              "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-6bc04934-914c-4006-a739-9ffde1c6ebed.jpeg",
+              "subtitle": "Kuřecí prsa nakrájíme na kousky, marinujeme v česneku, zázvoru a sojové omáčce. Kuře orestujeme, přidáme nakrájenou zeleninu, dochutíme vinným octem, medem a posypeme opraženými arašídy.Podáváme se salátkem z mrkve, okurek a jarních klíčků.",
+              "buttons": [
+                {
+                  "title": "Objednat za 140 Kč",
+                  "type": "web_url",
+                  "url": "https://www.ordr.cz/nase-jidla/detail/1347",
+                  "messenger_extensions": true,
+                  "webview_height_ratio": "tall",
+                  "fallback_url": "https://www.ordr.cz/"
+                }
+              ]
+            },
+            {
+              "title": "Glazírované kuřecí kousky s bok choy a jasmínovou rýží s mátou",
+              "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-45c39170-402f-4a29-aa34-15a6f40db911.jpeg",
+              "subtitle": "Zelenina bok choy je odrůda čínského zelí a doplňuje se se slaností sójové omáčky a zemitou chutí sezamového oleje. Kuřecí maso nejprve orestujeme na oleji a abychom udrželi pokrm bezlepkový, glazírujeme jej v sójové omáčce a rýžovou moukou. Jako přílohu podáváme aromatickou jasmínovou rýži. Máta nakonec rozvine chuť na vašem jazyku. Doporučujeme kuřecí maso s rýží ohřát v horkovzdušné nebo mikrovlnné troubě. Poté zamíchat s omáčkou.",
+              "buttons": [
+                {
+                  "title": "Objednat za 150 Kč",
+                  "type": "web_url",
+                  "url": "https://www.ordr.cz/nase-jidla/detail/1347",
+                  "messenger_extensions": true,
+                  "webview_height_ratio": "tall",
+                  "fallback_url": "https://www.ordr.cz/"
+                }
+              ]
+            }
+          ],
+          buttons: [
+            {
+              "title": "Dokončit objednávku",
+              "type": "postback",
+              "payload": "payload"
+            }
+          ]
+        }
+      }
+    }
+  };
+  callSendAPI(messageData);
+}
+
 
 // Start server
 // Webhooks must be available via SSL with a certificate signed by a valid 
