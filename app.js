@@ -304,7 +304,7 @@ function receivedPostback(event) {
   switch (payload) {
     case 'GET_STARTED':
       sendTextMessage(senderID, `Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`);
-      sendTextMessage(senderID, `linking status: ${account_linking.status} authorization_code: ${account_linking.authorization_code}`);
+      sendTextMessage(senderID, `linking status: ${event.account_linking.status} authorization_code: ${event.account_linking.authorization_code}`);
       break;
     default:
       sendTextMessage(senderID, `Postback called ${payload}`);
