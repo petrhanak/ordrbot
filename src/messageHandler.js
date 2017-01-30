@@ -4,22 +4,27 @@ const request = require('request');
 const response = require('./response');
 const linkingAccounts = require('./linkingAccounts');
 const fbApi = require('./fbApi');
-const textMessage = response.textMessage;
+const text = response.text;
+const template = response.template;
+
+const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
     send(
-      textMessage(`Linking status: ${linkingAccounts.get(event.sender.id)}`)
+      text(`Linking status: ${linkingAccounts.get(event.sender.id)}`)
     );
     send(
-      textMessage(`Neumím si povídat, jsem ještě moc malý bot :(`)
+      text(`Neumím si povídat, jsem ještě moc malý bot :(`)
     );
   },
   postback(event) {
     switch (event.postback.payload) {
       case 'GET_STARTED':
         this.flow.intro();
-        // this.flow.login();
+        break;
+      case 'CREATE_ORDER':
+        this.flow.login();
         break;
       case 'UNLINK_ACCOUNT':
         fbApi.unlinkAccount(event.sender.id);
@@ -28,7 +33,7 @@ const messageHandler = send => ({
     }
   },
   accountLink(event) {
-    switch(event.account_linking.status) {
+    switch (event.account_linking.status) {
       case 'linked':
         linkingAccounts.add(event.sender.id, event.account_linking.authorization_code);
         break;
@@ -38,13 +43,26 @@ const messageHandler = send => ({
       default:
     }
     send(
-      textMessage(`Linking status: ${event.account_linking.status}`)
+      text(`Linking status: ${event.account_linking.status}`)
     );
   },
   flow: {
     intro: () => {
       send(
-        textMessage(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`)
+        text(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`)
+      );
+    },
+    login: () => {
+      send(
+        template({
+          template_type: "button",
+          text: "Přihlaš se prosím do svého ordr účtu.",
+          buttons: [{
+            type: "account_link",
+            title: "Přihlásit se",
+            url: SERVER_URL + "/authorize"
+          }]
+        })
       );
     }
   }

@@ -1,6 +1,13 @@
-const textMessage = (messageText, metadata) => ({
-  text: messageText,
-  metadata: metadata
+const text = (messageText) => ({
+  text: messageText
 });
 
-module.exports.textMessage = textMessage;
+const template = (payload) => ({
+  attachment: {
+    type: "template",
+    payload: payload,
+  },
+});
+
+module.exports.text = text;
+module.exports.template = text;
