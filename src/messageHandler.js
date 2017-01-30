@@ -5,10 +5,10 @@ const request = require('request');
 const response = require('./response');
 const linkingAccounts = require('./linkingAccounts');
 const fbApi = require('./fbApi');
-const text = response.text;
-// const template = response.template;
 
-// const SERVER_URL = config.get('serverURL');
+const text = response.text;
+const template = response.template;
+const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
@@ -53,19 +53,19 @@ const messageHandler = send => ({
         text(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`)
       );
     },
-    // login: () => {
-    //   send(
-    //     template({
-    //       template_type: "button",
-    //       text: "Přihlaš se prosím do svého ordr účtu.",
-    //       buttons: [{
-    //         type: "account_link",
-    //         title: "Přihlásit se",
-    //         url: SERVER_URL + "/authorize"
-    //       }]
-    //     })
-    //   );
-    // }
+    login: () => {
+      send(
+        template({
+          template_type: "button",
+          text: "Přihlaš se prosím do svého ordr účtu.",
+          buttons: [{
+            type: "account_link",
+            title: "Přihlásit se",
+            url: `${SERVER_URL}/authorize`
+          }]
+        })
+      );
+    }
   }
 });
 
