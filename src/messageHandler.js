@@ -36,9 +36,15 @@ const messageHandler = send => ({
   accountLink(event) {
     switch (event.account_linking.status) {
       case 'linked':
+        send(
+          text(`Linked ${event.sender.id} with ${event.account_linking.authorization_code}`)
+        );
         linkingAccounts.add(event.sender.id, event.account_linking.authorization_code);
         break;
       case 'unlinked':
+        send(
+          text(`Unlinked ${event.sender.id}`)
+        );
         linkingAccounts.remove(event.sender.id);
         break;
       default:
