@@ -2,10 +2,14 @@
 
 module.exports = {
   database: {
-    host: process.env.DB_HOST,
-    name: process.env.DB_NAME,
+    server: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    port: process.env.DB_PORT || 1433,
+    options: {
+      encrypt: true
+    }
   },
   facebook: {
     appSecret: process.env.FB_APP_SECRET,
