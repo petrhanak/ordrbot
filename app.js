@@ -246,8 +246,8 @@ function receivedMessage(event) {
       case 'account linking':
         sendAccountLinking(senderID);
         break;
-      case 'linking status':
-        sendTextMessage(senderID, `linking status: ${event.account_linking.status} authorization_code: ${event.account_linking.authorization_code}`);
+      case 'dump':
+        sendTextMessage(senderID, JSON.stringify(event));
         break;
       default:
         sendTextMessage(senderID, messageText);
