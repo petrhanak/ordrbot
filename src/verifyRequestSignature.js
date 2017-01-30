@@ -15,12 +15,10 @@ function verifyRequestSignature(req, res, buf) {
   const signature = req.headers["x-hub-signature"];
 
   if (signature) {
-    const elements = signature.split('=');
-    const method = elements[0];
-    const signatureHash = elements[1];
+    const signatureHash = signature.split('=')[1];
 
     const expectedHash = crypto
-      .createHmac('sha1', APP_SECRET)
+      .createHmac('sha1', config.get('facebook.appSecret'))
       .update(buf)
       .digest('hex');
 
