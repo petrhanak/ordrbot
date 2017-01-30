@@ -301,9 +301,13 @@ function receivedPostback(event) {
   console.log("Received postback for user %d and page %d with payload '%s' " +
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
-  // When a postback is called, we'll send a message back to the sender to
-  // let them know it was successful
-  sendTextMessage(senderID, `Postback called ${payload}`);
+  switch (payload) {
+    case 'GET_STARTED':
+      sendTextMessage(senderID, `Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`);
+      break;
+    default:
+      sendTextMessage(senderID, `Postback called ${payload}`);
+  }
 }
 
 /*
