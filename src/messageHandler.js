@@ -1,5 +1,6 @@
 'use strict';
 
+const config = require('config');
 const request = require('request');
 const response = require('./response');
 const linkingAccounts = require('./linkingAccounts');
