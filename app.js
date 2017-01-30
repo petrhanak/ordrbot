@@ -246,6 +246,11 @@ function receivedMessage(event) {
       case 'account linking':
         sendAccountLinking(senderID);
         break;
+
+      case 'unlink account':
+        unlinkAccount(senderID);
+        break;
+
       case 'dump':
         sendTextMessage(senderID, JSON.stringify(event));
         break;
@@ -257,6 +262,16 @@ function receivedMessage(event) {
   }
 }
 
+function unlinkAccount(PSID) {
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/unlink_accounts',
+    qs: { access_token: PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: {
+      psid: PSID,
+    },
+  })
+}
 
 /*
  * Delivery Confirmation Event
