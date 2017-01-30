@@ -4,12 +4,12 @@ const text = messageText => ({
   text: messageText
 });
 
-// const template = (payload) => ({
-//   attachment: {
-//     type: "template",
-//     payload: payload,
-//   },
-// });
+const template = payload => ({
+  attachment: {
+    type: "template",
+    payload: payload
+  }
+});
 
 module.exports.text = text;
-// module.exports.template = text;
+module.exports.template = text;
