@@ -11,7 +11,7 @@ const request = require('request');
 const callSendAPI = (messagingEvent) => (messageData) =>
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: config.get('pageAccessToken') },
+    qs: { access_token: config.get('facebook.pageAccessToken') },
     method: 'POST',
     json: {
       recipient: {
