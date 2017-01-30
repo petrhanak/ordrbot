@@ -1,4 +1,4 @@
-<!-- 
+<!--
 
 Copyright 2016-present, Facebook, Inc.
 All rights reserved.
@@ -17,27 +17,12 @@ LICENSE file in the root directory of this source tree.
   </head>
   <body>
 
-    <h1>Login</h1>
-
-    <div>
-      This should be a login page. If the user successfully logs, they should 
-      be redirect to this link: <a href="<%= redirectURISuccess %>">Complete Account Link</a>
-    </div>
-
-    <div>
-      Account linking token: <%= accountLinkingToken %> 
-    </div>
-
-    <div>
-      Redirect URI: <%= redirectURI %> 
-    </div>
-
-    <div>
-      Redirect URI Successful: <%= redirectURISuccess %> 
-    </div>
-    
-
-
+    <h1>Simulated login with delay</h1>
+    <script>
+      setTimeout(function () {
+        window.location.href = "<%= redirectURISuccess %>"
+      }, 2000);
+    </script>
 
   </body>
 </html>
