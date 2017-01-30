@@ -9,6 +9,9 @@ const textMessage = response.textMessage;
 const messageHandler = send => ({
   message(event) {
     send(
+      textMessage(`Linking status: ${linkingAccounts.get(event.sender.id)}`)
+    );
+    send(
       textMessage(`Neumím si povídat, jsem ještě moc malý bot :(`)
     );
   },
@@ -25,6 +28,15 @@ const messageHandler = send => ({
     }
   },
   accountLink(event) {
+    switch(event.account_linking.status) {
+      case 'linked':
+        linkingAccounts.add(event.sender.id, event.account_linking.authorization_code);
+        break;
+      case 'unlinked':
+        linkingAccounts.remove(event.sender.id);
+        break;
+      default:
+    }
     send(
       textMessage(`Linking status: ${event.account_linking.status}`)
     );

@@ -3,7 +3,7 @@
 const config = require('config');
 const request = require('request');
 
-const PAGE_ACCESS_TOKEN = ('facebook.pageAccessToken')
+const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
 
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll
