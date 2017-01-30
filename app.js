@@ -304,7 +304,7 @@ function receivedPostback(event) {
   switch (payload) {
     case 'GET_STARTED':
       sendTextMessage(senderID, `Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`);
-      sendTextMessage(senderID, `Here is your id: ${senderID}`);
+      sendTextMessage(senderID, `sender: ${senderID}, recipient: ${recipientID}`);
       break;
     default:
       sendTextMessage(senderID, `Postback called ${payload}`);
