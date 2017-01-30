@@ -12,7 +12,12 @@ const callSendAPI = (messagingEvent) => (messageData) =>
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: config.get('pageAccessToken') },
     method: 'POST',
-    json: messageData
+    json: {
+      recipient: {
+        id: messagingEvent.sender.id
+      },
+      message: messageData
+    }
 
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {

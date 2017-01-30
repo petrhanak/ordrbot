@@ -1,6 +1,7 @@
 'use strict';
 
 const callSendAPI = require('./callSendAPI');
+const messageHandler = require('./messageHandler');
 
 function validationMiddleware(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
