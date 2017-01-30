@@ -1,6 +1,7 @@
 'use strict';
 
 const config = require('config');
+const request = require('request');
 
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll
