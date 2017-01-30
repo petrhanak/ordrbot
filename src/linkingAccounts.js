@@ -1,3 +1,5 @@
+'use strict';
+
 const accounts = {};
 
 function add(psid, accessToken) {
