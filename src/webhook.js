@@ -25,7 +25,7 @@ function commonMiddleware(req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function (messagingEvent) {
-        const send = callSendAPI(messagingEvent.recipient.id);
+        const send = callSendAPI(messagingEvent);
         const handler = messageHandler(send);
 
         if (messagingEvent.message) {
