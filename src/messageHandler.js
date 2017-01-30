@@ -1,6 +1,5 @@
 'use strict';
 
-const send = require('./callSendAPI');
 const response = require('./response');
 const textMessage = response.textMessage;
 
