@@ -31,7 +31,7 @@ function commonMiddleware(req, res) {
         console.log(handler);
 
         if (messagingEvent.message) {
-          handler.massage(messagingEvent);
+          handler.message(messagingEvent);
         } else if (messagingEvent.postback) {
           handler.postback(messagingEvent);
         } else if (messagingEvent.account_linking) {
