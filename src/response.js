@@ -12,4 +12,4 @@ const template = payload => ({
 });
 
 module.exports.text = text;
-module.exports.template = text;
+module.exports.template = template;
