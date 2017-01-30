@@ -29,3 +29,5 @@ const messageHandler = (send) => ({
     }
   }
 });
+
+module.exports = messageHandler;
