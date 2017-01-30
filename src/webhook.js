@@ -1,6 +1,6 @@
 'use strict';
 
-const callSendAPI = require('./callSendAPI');
+const fbApi = require('./fbApi');
 const messageHandler = require('./messageHandler');
 
 function validationMiddleware(req, res) {
@@ -25,7 +25,7 @@ function commonMiddleware(req, res) {
 
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function (messagingEvent) {
-        const send = callSendAPI(messagingEvent);
+        const send = fbApi.message(messagingEvent);
         const handler = messageHandler(send);
 
         if (messagingEvent.message) {

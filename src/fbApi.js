@@ -3,15 +3,17 @@
 const config = require('config');
 const request = require('request');
 
+const PAGE_ACCESS_TOKEN = ('facebook.pageAccessToken')
+
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll
  * get the message id in a response
  *
  */
-const callSendAPI = (messagingEvent) => (messageData) =>
+const message = (messagingEvent) => (messageData) =>
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: config.get('facebook.pageAccessToken') },
+    qs: { access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
     json: {
       recipient: {
@@ -37,4 +39,15 @@ const callSendAPI = (messagingEvent) => (messageData) =>
     }
   });
 
-module.exports = callSendAPI;
+const unlinkAccount = (PSID) =>
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/unlink_accounts',
+    qs: { access_token: PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: {
+      psid: PSID,
+    },
+  });
+
+module.exports.message = message;
+module.exports.unlinkAccount = unlinkAccount;

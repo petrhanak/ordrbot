@@ -1,6 +1,9 @@
 'use strict';
 
+const request = require('request');
 const response = require('./response');
+const linkingAccounts = require('./linkingAccounts');
+const fbApi = require('./fbApi');
 const textMessage = response.textMessage;
 
 const messageHandler = send => ({
@@ -10,15 +13,21 @@ const messageHandler = send => ({
     );
   },
   postback(event) {
-    switch (payload) {
+    switch (event.postback.payload) {
       case 'GET_STARTED':
         this.flow.intro();
+        this.flow.login();
+        break;
+      case 'UNLINK_ACCOUNT':
+        fbApi.unlinkAccount(event.sender.id);
         break;
       default:
     }
   },
   accountLink(event) {
-
+    send(
+      textMessage(`Linking status: ${event.account_linking.status}`)
+    );
   },
   flow: {
     intro: () => {
