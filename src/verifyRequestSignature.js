@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
+const config = require('config');
 
 /*
  * Verify that the callback came from Facebook. Using the App Secret from
