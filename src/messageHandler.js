@@ -16,7 +16,7 @@ const messageHandler = send => ({
     switch (event.postback.payload) {
       case 'GET_STARTED':
         this.flow.intro();
-        this.flow.login();
+        // this.flow.login();
         break;
       case 'UNLINK_ACCOUNT':
         fbApi.unlinkAccount(event.sender.id);
