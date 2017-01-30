@@ -4,7 +4,6 @@ const accounts = {};
 
 function add(psid, accessToken) {
   accounts[psid] = accessToken;
-  console.log(`Account added, new state is ${JSON.stringify(accounts)}`)
 }
 
 function remove(psid) {
