@@ -3,7 +3,7 @@
 const response = require('./response');
 const textMessage = response.textMessage;
 
-const messageHandler = (send) => ({
+const messageHandler = send => ({
   message(event) {
     send(
       textMessage(`Neumím si povídat, jsem ještě moc malý bot :(`)
