@@ -60,7 +60,6 @@ const messageHandler = send => ({
           text: "Přihlaš se prosím do svého ordr účtu.",
           buttons: [{
             type: "account_link",
-            title: "Přihlásit se",
             url: `${SERVER_URL}/authorize`
           }]
         })
