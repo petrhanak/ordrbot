@@ -9,6 +9,7 @@ const order = require('./order');
 
 const text = response.text;
 const template = response.template;
+const typing = response.typing;
 const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({

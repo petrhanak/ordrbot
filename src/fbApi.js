@@ -10,18 +10,18 @@ const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
  * get the message id in a response
  *
  */
-const message = (messagingEvent) => (messageData) =>
+const message = (event) => (data) => {
+  const data = Object.assign({}, {
+    recipient: {
+      id: event.sender.id
+    }
+  }, data);
+
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
-    json: {
-      recipient: {
-        id: messagingEvent.sender.id
-      },
-      message: messageData
-    }
-
+    json: data
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       const recipientId = body.recipient_id;
@@ -38,6 +38,7 @@ const message = (messagingEvent) => (messageData) =>
       console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
     }
   });
+}
 
 const unlinkAccount = (PSID) =>
   request({
