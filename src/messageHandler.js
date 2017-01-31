@@ -92,11 +92,13 @@ const messageHandler = send => ({
         // login successful
         send(
           text(`Díky <3`)
-        );
-        send(
-          text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky 😉`)
-        );
-        this.flow.listMenu();
+        ).then(() => {
+          return send(
+            text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky 😉`)
+          );
+        }).then(() => {
+          this.flow.listMenu();
+        });
         break;
       case 'unlinked':
         linkingAccounts.remove(event.sender.id);
