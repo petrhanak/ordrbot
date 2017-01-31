@@ -17,9 +17,9 @@ const messageHandler = send => ({
     );
 
     const options = [
-      'Neumím si povídat, jsem ještě moc malý bot :(',
-      "Já nerozumět řeči tvého kmene",
-      "Ja tobe nerozumet ceska tataro :)"
+      'Neumím si povídat, jsem ještě moc malý bot 😕',
+      "Já nerozumět řeči tvého kmene 😳",
+      "Ja tobe nerozumet ceska tataro"
     ];
 
     // send random option
@@ -40,7 +40,7 @@ const messageHandler = send => ({
         break;
       case 'UNLINK_ACCOUNT':
         send(
-          text(`Třeba si ještě napíšeme... někdy :broken_heart: :cry:`)
+          text(`Třeba si ještě napíšeme... někdy 💔 😢`)
         );
         fbApi.unlinkAccount(event.sender.id);
         break;
@@ -60,14 +60,11 @@ const messageHandler = send => ({
           text(`Díky <3`)
         );
         send(
-          text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky ;)`)
+          text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky 😉`)
         );
         break;
       case 'unlinked':
         linkingAccounts.remove(event.sender.id);
-        send(
-          text(`Nemám páru, kdo jsi.`)
-        );
         break;
       default:
     }
@@ -75,7 +72,7 @@ const messageHandler = send => ({
   flow: {
     intro() {
       send(
-        text(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`)
+        text(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo. 😉`)
       );
     },
     order(event) {
@@ -99,7 +96,7 @@ const messageHandler = send => ({
     },
     showMenu() {
       send(
-        text(`Tohle je dnešní menu`)
+        text(`Tohle je dnešní menu 😋`)
       );
       send(
         template({
