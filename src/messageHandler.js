@@ -15,7 +15,7 @@ const messageHandler = send => ({
   message(event) {
     if (event.message.attachments && event.message.attachments.length === 1 && event.message.attachments[0].type === 'location') {
       const coordinates = event.message.attachments[0].payload.coordinates;
-      order.setLocation(PSID, coordinates);
+      order.setLocation(event.sender.id, coordinates);
       this.flow.listPayment();
       return;
     }
