@@ -13,7 +13,12 @@ const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
-    console.log(JSON.stringify(event));
+    if (event.message.attachments && event.message.attachments.length === 0 && event.message.attachments[0].type === 'location') {
+      const coordinates = event.message.attachments[0].payload.coordinates;
+      order.setLocation(PSID, coordinates);
+      this.flow.listPayment();
+      return;
+    }
 
     const options = [
       'Neumím si povídat, jsem ještě moc malý bot 😕',
