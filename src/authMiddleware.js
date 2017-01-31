@@ -9,11 +9,9 @@ function authMiddleware(req, res) {
   // Redirect users to this URI on successful login
   const redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
 
-  res.render('authorize', {
-    accountLinkingToken: accountLinkingToken,
-    redirectURI: redirectURI,
-    redirectURISuccess: redirectURISuccess
-  });
+  request(redirectURISuccess).then(()=>{
+    res.render('authorize');
+  })
 }
 
 module.exports = authMiddleware;

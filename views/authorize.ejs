@@ -1,29 +1,8 @@
 <html>
   <head>
     <title>OAuth Test</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      div { margin: 10px 0px 10px 0px; }
-    </style>
   </head>
   <body>
-    <style>
-      html, body, iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        margin: 0;
-      }
-    </style>
-    <iframe id="redirectIframe" src="<%= redirectURISuccess %>"></iframe>
-    <script>
-      const iframe = document.getElementById('redirectIframe');
-      iframe.onload = function() {
-        setTimeout(function() {
-          window.close();
-        }, 500)
-      }
-    </script>
-
+    <script>window.close();</script>
   </body>
 </html>
