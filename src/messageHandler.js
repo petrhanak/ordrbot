@@ -73,19 +73,19 @@ const messageHandler = send => ({
     }
   },
   flow: {
-    intro: () => {
+    intro() {
       send(
         text(`Ahoj, jsem ordrbot. Pomůžu ti objednat si jídlo.`)
       );
     },
-    order: event => {
+    order(event) {
       if (linkingAccounts.get(event.sender.id) === undefined) {
-        this.flow.login();
+        this.login();
       } else {
         this.showMenu();
       }
     },
-    login: () => {
+    login() {
       send(
         template({
           template_type: "button",
@@ -97,7 +97,7 @@ const messageHandler = send => ({
         })
       );
     },
-    showMenu: () => {
+    showMenu() {
       send(
         text(`Tohle je dnešní menu`)
       );
