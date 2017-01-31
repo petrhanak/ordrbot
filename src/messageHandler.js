@@ -13,11 +13,7 @@ const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
-    send(
-      text(
-        JSON.stringify(event)
-      )
-    );
+    console.log(JSON.stringify(event));
 
     const options = [
       'Neumím si povídat, jsem ještě moc malý bot 😕',
