@@ -12,10 +12,6 @@ const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
-    send(
-      text(`Linking status: ${linkingAccounts.get(event.sender.id)}`)
-    );
-
     const options = [
       'Neumím si povídat, jsem ještě moc malý bot 😕',
       "Já nerozumět řeči tvého kmene 😳",
