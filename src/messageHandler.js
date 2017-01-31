@@ -216,10 +216,12 @@ const messageHandler = send => ({
     },
     customLocation() {
       send({
-        "text": "Kde si chceš převzít jídlo od kurýra?",
-        "quick_replies": [{
-          "content_type": "location",
-        }]
+        message: {
+          "text": "Kde si chceš převzít jídlo od kurýra?",
+          "quick_replies": [{
+            "content_type": "location",
+          }]
+        }
       })
     },
     listPayment() {
