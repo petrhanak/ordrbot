@@ -11,7 +11,7 @@ const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
  *
  */
 const message = (event) => (data) => {
-  const data = Object.assign({}, {
+  const json = Object.assign({}, {
     recipient: {
       id: event.sender.id
     }
@@ -21,7 +21,7 @@ const message = (event) => (data) => {
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
     method: 'POST',
-    json: data
+    json: json
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       const recipientId = body.recipient_id;
