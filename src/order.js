@@ -1,28 +1,28 @@
 'use strict';
 
-const baskets = {};
+const orders = {};
 
 function create(PSID) {
-  baskets[PSID] = {
+  orders[PSID] = {
     items: [],
     location: null
   };
 }
 
 function addItem(PSID, item) {
-  baskets[PSID].items.push(item);
+  orders[PSID].items.push(item);
 }
 
 function setLocation(PSID, location) {
-  baskets[PSID].location = location;
+  orders[PSID].location = location;
 }
 
 function get(PSID) {
-  return baskets[PSID]
+  return orders[PSID]
 }
 
 function remove(PSID) {
-  delete baskets[PSID]
+  delete orders[PSID]
 }
 
 module.exports.addItem = addItem;

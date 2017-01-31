@@ -36,6 +36,7 @@ const messageHandler = send => ({
         break;
       case 'CREATE_ORDER':
         this.flow.order(event);
+        order.create(PSID);
         break;
       case 'UNLINK_ACCOUNT':
         send(
@@ -48,7 +49,7 @@ const messageHandler = send => ({
         send(
           text(`Přidal jsem položku #${itemId} do košíku`)
         );
-        basket.add(PSID, itemId);
+        order.addItem(PSID, itemId);
         break;
       case 'FINISH_ORDER':
         const basket = order.get(PSID).items;
