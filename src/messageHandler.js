@@ -272,20 +272,21 @@ const messageHandler = send => ({
             "total_cost": 220
           }
         })
-      );
-      send(
-        template({
-          "template_type": "button",
-          "text": "Potvrdit objednávku?",
-          "buttons": [
-            {
-              "type": "postback",
-              "title": "Zaplatit",
-              "payload": "CONFIRM_ORDER"
-            }
-          ]
-        })
-      );
+      ).then(() => {
+        send(
+          template({
+            "template_type": "button",
+            "text": "Zkontroluj jestli je všechno v pořádku a potvrď prosím objednávku",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Zaplatit",
+                "payload": "CONFIRM_ORDER"
+              }
+            ]
+          })
+        );
+      })
     },
     thanks() {
       send(
