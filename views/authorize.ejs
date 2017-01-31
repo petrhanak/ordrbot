@@ -1,8 +1,20 @@
 <html>
   <head>
     <title>OAuth Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      div { margin: 10px 0px 10px 0px; }
+    </style>
   </head>
   <body>
-    <script>window.close();</script>
+
+    <h1>Simulated login with delay</h1>
+    <script>
+      setTimeout(function () {
+        const url = "<%= redirectURISuccess %>".replace('&amp;', '&'); // ugly but works, don't judge me ;_;
+        window.location.href = url;
+      }, 1000);
+    </script>
+
   </body>
 </html>

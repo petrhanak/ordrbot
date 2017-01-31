@@ -1,7 +1,3 @@
-'use strict';
-
-const request = require('request');
-
 function authMiddleware(req, res) {
   const accountLinkingToken = req.query.account_linking_token;
   const redirectURI = req.query.redirect_uri;
@@ -13,14 +9,11 @@ function authMiddleware(req, res) {
   // Redirect users to this URI on successful login
   const redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
 
-  request({
-    uri: redirectURISuccess
-  }, function (error, response, body) {
-    if (error || response.statusCode !== 200) {
-      console.error("Seding account linking request failed", response.statusCode, response.statusMessage, body.error);
-    }
-    res.render('authorize');
-  })
+  res.render('authorize', {
+    accountLinkingToken: accountLinkingToken,
+    redirectURI: redirectURI,
+    redirectURISuccess: redirectURISuccess
+  });
 }
 
 module.exports = authMiddleware;
