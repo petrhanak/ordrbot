@@ -132,6 +132,7 @@ const messageHandler = send => ({
       );
     },
     listMenu() {
+      console.log('list menu ok');
       send(
         text(`Tohle je dnešní menu 😋`),
         5000

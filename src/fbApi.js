@@ -49,8 +49,11 @@ const message = (event) => (data, delay) => {
   if (delay) {
     return new Promise(resolve => {
       call(typing.on).then(() => {
+        console.log('typing on ok, delay '+ delay);
         setTimeout(() => {
+          console.log('delay ended');
           call(data, event).then(() => {
+            console.log('delay ended');
             resolve()
           });
         }, delay)
