@@ -6,7 +6,7 @@ const typing = require('./response').typing;
 
 const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
 
-const call = (json) => {
+const call = (data) => {
   const json = Object.assign({}, {
     recipient: {
       id: event.sender.id
