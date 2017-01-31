@@ -194,14 +194,12 @@ const messageHandler = send => ({
               "title": "Rohanské nábřeží 23",
               "payload": "SELECT_LOCATION:Rohanské nábřeží 23"
             },
-          ],
-          "quick_replies": [
             {
-              "content_type": "text",
+              "type": "postback",
               "title": "Jiná adresa",
               "payload": "SELECT_LOCATION_CUSTOM"
-            },
-          ]
+            }
+          ],
         })
       )
     },
