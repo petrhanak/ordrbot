@@ -6,7 +6,7 @@ const typing = require('./response').typing;
 
 const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
 
-const call = (data) => {
+const call = (data, event) => {
 
   return new Promise(resolve =>
     request({
@@ -50,7 +50,7 @@ const message = (event) => (data, delay) => {
     return new Promise(resolve => {
       call(typing.on).then(() => {
         setTimeout(() => {
-          call(data).then(() => {
+          call(data, event).then(() => {
             resolve()
           });
         }, delay)
@@ -58,7 +58,7 @@ const message = (event) => (data, delay) => {
     })
   }
 
-  return call(data)
+  return call(data, event)
 };
 
 const unlinkAccount = (PSID) =>
