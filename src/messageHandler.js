@@ -80,7 +80,7 @@ const messageHandler = send => ({
         this.flow.sendReceipt();
         break;
       case 'CONFIRM_ORDER':
-        this.flow.thanks();
+        this.flow.paying();
         break;
       default:
     }
@@ -288,10 +288,15 @@ const messageHandler = send => ({
         );
       })
     },
-    thanks() {
+    paying() {
       send(
-        text('Děkuji za objednání.')
-      );
+        text('Předávám objednávku kurýrovi 🛵'),
+        4000
+      ).then(() => {
+        send(
+          text('Vyřízeno, přeji dobrou chuť 😋')
+        );
+      })
     }
   }
 });
