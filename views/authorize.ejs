@@ -7,15 +7,22 @@
     </style>
   </head>
   <body>
-
-    <h1>Simulated login with delay</h1>
-    <iframe id="redirectIframe"></iframe>
+    <style>
+      html, body, iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        margin: 0;
+      }
+    </style>
+    <iframe id="redirectIframe" src="<%= redirectURISuccess %>"></iframe>
     <script>
-      setTimeout(function () {
-        const url = "<%= redirectURISuccess %>".replace('&amp;', '&'); // ugly but works, don't judge me ;_;
-        document.getElementById('redirectIframe').src = url;
-//        window.location.href = url;
-      }, 1000);
+      const iframe = document.getElementById('redirectIframe');
+      document.getElementById('ifrm').onload = function() {
+        setTimeout(function() {
+          window.close();
+        }, 500)
+      }
     </script>
 
   </body>
