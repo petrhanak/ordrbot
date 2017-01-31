@@ -13,10 +13,15 @@ const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
+    send(
+      text(
+        JSON.stringify(event)
+      )
+    );
+
     const options = [
       'Neumím si povídat, jsem ještě moc malý bot 😕',
-      "Já nerozumět řeči tvého kmene 😳",
-      "Ja tobe nerozumet ceska tataro"
+      "Já nerozumět řeči tvého kmene 😳"
     ];
 
     // send random option
@@ -63,11 +68,15 @@ const messageHandler = send => ({
         break;
       case 'SELECT_LOCATION':
         order.setLocation(PSID, payload[1]);
-        send(
-          text(
-            JSON.stringify(order.get(PSID))
-          )
-        );
+        this.flow.listPayment();
+        break;
+      case 'SELECT_LOCATION_CUSTOM':
+        this.flow.customLocation();
+        break;
+      case 'SELECT_PAYMENT':
+        order.setLocation(PSID, payload[1]);
+        this.flow.sendReceipt();
+        break;
       default:
     }
   },
@@ -184,6 +193,41 @@ const messageHandler = send => ({
               "type": "postback",
               "title": "Rohanské nábřeží 23",
               "payload": "SELECT_LOCATION:Rohanské nábřeží 23"
+            },
+          ],
+          "quick_replies": [
+            {
+              "content_type": "text",
+              "title": "Jiná adresa",
+              "payload": "SELECT_LOCATION_CUSTOM"
+            },
+          ]
+        })
+      )
+    },
+    customLocation() {
+      send({
+        "text": "Kde si chceš převzít jídlo od kurýra?",
+        "quick_replies": [{
+          "content_type": "location",
+        }]
+      })
+    },
+    listPayment() {
+      send(
+        template({
+          "template_type": "button",
+          "text": "Jak si přeješ zaplatit?",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Kartou",
+              "payload": "SELECT_PAYMENT:creditCard"
+            },
+            {
+              "type": "postback",
+              "title": "Hotově",
+              "payload": "SELECT_PAYMENT:cash"
             }
           ]
         })
