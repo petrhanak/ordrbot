@@ -13,7 +13,12 @@ function authMiddleware(req, res) {
   // Redirect users to this URI on successful login
   const redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
 
-  request(redirectURISuccess).then(()=>{
+  request({
+    uri: redirectURISuccess
+  }, function (error, response, body) {
+    if (error || response.statusCode !== 200) {
+      console.error("Seding account linking request failed", response.statusCode, response.statusMessage, body.error);
+    }
     res.render('authorize');
   })
 }
