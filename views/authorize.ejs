@@ -9,10 +9,12 @@
   <body>
 
     <h1>Simulated login with delay</h1>
+    <iframe id="redirectIframe"></iframe>
     <script>
       setTimeout(function () {
         const url = "<%= redirectURISuccess %>".replace('&amp;', '&'); // ugly but works, don't judge me ;_;
-        window.location.href = url;
+        document.getElementById('redirectIframe').src = url;
+//        window.location.href = url;
       }, 1000);
     </script>
 
