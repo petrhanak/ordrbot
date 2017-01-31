@@ -5,6 +5,7 @@ const request = require('request');
 const response = require('./response');
 const linkingAccounts = require('./linkingAccounts');
 const fbApi = require('./fbApi');
+const order = require('./order');
 
 const text = response.text;
 const template = response.template;
@@ -26,7 +27,9 @@ const messageHandler = send => ({
     );
   },
   postback(event) {
-    switch (event.postback.payload.split(' ')[0]) {
+    const payload = event.postback.payload.split(':');
+    const PSID = event.sender.id;
+    switch (payload[0]) {
       case 'GET_STARTED':
         this.flow.intro();
         this.flow.order(event);
@@ -38,11 +41,31 @@ const messageHandler = send => ({
         send(
           text(`Třeba si ještě napíšeme... někdy 💔 😢`)
         );
-        fbApi.unlinkAccount(event.sender.id);
+        fbApi.unlinkAccount(PSID);
         break;
       case 'ORDER_ITEM':
+        const itemId = payload[1];
         send(
-          text(`Přidávám položku #${event.postback.payload.split(' ')[1]} do košíku`)
+          text(`Přidal jsem položku #${itemId} do košíku`)
+        );
+        basket.add(PSID, itemId);
+        break;
+      case 'FINISH_ORDER':
+        const basket = order.get(PSID).items;
+        if(basket.length < 1) {
+          send(
+            text(`Prázdný košík znamená prázdné břicho. Něco si vyber.`)
+          );
+        } else {
+          this.flow.listLocations()
+        }
+        break;
+      case 'SELECT_LOCATION':
+        order.setLocation(PSID, payload[1]);
+        send(
+          text(
+            JSON.stringify(order.get(PSID))
+          )
         );
       default:
     }
@@ -58,7 +81,7 @@ const messageHandler = send => ({
         send(
           text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky 😉`)
         );
-        this.flow.showMenu();
+        this.flow.listMenu();
         break;
       case 'unlinked':
         linkingAccounts.remove(event.sender.id);
@@ -76,7 +99,7 @@ const messageHandler = send => ({
       if (linkingAccounts.get(event.sender.id) === undefined) {
         this.login();
       } else {
-        this.showMenu();
+        this.listMenu();
       }
     },
     login() {
@@ -91,7 +114,7 @@ const messageHandler = send => ({
         })
       );
     },
-    showMenu() {
+    listMenu() {
       send(
         text(`Tohle je dnešní menu 😋`)
       );
@@ -106,7 +129,7 @@ const messageHandler = send => ({
               "buttons": [{
                 "title": "Objednat za 140 Kč",
                 "type": "postback",
-                "payload": "ORDER_ITEM 1"
+                "payload": "ORDER_ITEM:1"
               }],
             },
             {
@@ -115,7 +138,7 @@ const messageHandler = send => ({
               "buttons": [{
                 "title": "Objednat za 150 Kč",
                 "type": "postback",
-                "payload": "ORDER_ITEM 2"
+                "payload": "ORDER_ITEM:2"
               }]
             }, {
               "title": "Čistá jablečná nefiltrovaná šťáva",
@@ -123,7 +146,7 @@ const messageHandler = send => ({
               "buttons": [{
                 "title": "Objednat za 40 Kč",
                 "type": "postback",
-                "payload": "ORDER_ITEM 3"
+                "payload": "ORDER_ITEM:3"
               }]
             },{
               "title": "Limonáda Divoženka",
@@ -131,7 +154,7 @@ const messageHandler = send => ({
               "buttons": [{
                 "title": "Objednat za 55 Kč",
                 "type": "postback",
-                "payload": "ORDER_ITEM 4"
+                "payload": "ORDER_ITEM:4"
               }]
             }
           ],
@@ -144,6 +167,26 @@ const messageHandler = send => ({
           ]
         })
       )
+    },
+    listLocations() {
+      template({
+        "template_type":"button",
+        "text":"Kam ti máme jídlo přivézt?",
+        "buttons":[
+          {
+            "type":"postback",
+            "title":"Roháčova 177/7",
+            "payload":"SELECT_LOCATION:Roháčova 177/7"
+          },
+          {
+            "type":"postback",
+            "title":"Rohanské nábřeží 23",
+            "payload":"SELECT_LOCATION:Rohanské nábřeží 23"
+          }
+        ]
+      })
+    },
+    sendReceipt() {
     }
   }
 });
