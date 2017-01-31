@@ -39,6 +39,9 @@ const messageHandler = send => ({
         this.flow.order(event);
         break;
       case 'UNLINK_ACCOUNT':
+        send(
+          text(`Třeba si ještě napíšeme... někdy :broken_heart: :cry:`)
+        );
         fbApi.unlinkAccount(event.sender.id);
         break;
       case 'ORDER_ITEM':
@@ -63,7 +66,7 @@ const messageHandler = send => ({
       case 'unlinked':
         linkingAccounts.remove(event.sender.id);
         send(
-          text(`Díky <3`)
+          text(`Nemám páru, kdo jsi.`)
         );
         break;
       default:
@@ -76,7 +79,7 @@ const messageHandler = send => ({
       );
     },
     order: event => {
-      if (linkingAccounts(event.sender.id) === undefined) {
+      if (linkingAccounts.get(event.sender.id) === undefined) {
         this.login();
       } else {
         this.showMenu();
