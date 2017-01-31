@@ -292,12 +292,12 @@ const messageHandler = send => ({
     },
     paying() {
       send(
-        text('Předávám objednávku kurýrovi 🛵'),
-        4000
+        text('Předávám objednávku kurýrovi 🛵')
       ).then(() => {
         send(
-          text('Vyřízeno, přeji dobrou chuť 😋')
-        );
+          text('Vyřízeno, přeji dobrou chuť 😋'),
+          4000
+        )
       })
     }
   }
