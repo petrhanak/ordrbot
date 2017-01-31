@@ -80,7 +80,7 @@ const messageHandler = send => ({
     },
     order: event => {
       if (linkingAccounts.get(event.sender.id) === undefined) {
-        this.login();
+        this.flow.login();
       } else {
         this.showMenu();
       }
