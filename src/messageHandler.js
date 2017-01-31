@@ -13,7 +13,7 @@ const SERVER_URL = config.get('serverURL');
 
 const messageHandler = send => ({
   message(event) {
-    if (event.message.attachments && event.message.attachments.length === 0 && event.message.attachments[0].type === 'location') {
+    if (event.message.attachments && event.message.attachments.length === 1 && event.message.attachments[0].type === 'location') {
       const coordinates = event.message.attachments[0].payload.coordinates;
       order.setLocation(PSID, coordinates);
       this.flow.listPayment();
@@ -75,8 +75,11 @@ const messageHandler = send => ({
         this.flow.customLocation();
         break;
       case 'SELECT_PAYMENT':
-        order.setLocation(PSID, payload[1]);
+        order.setPayment(PSID, payload[1]);
         this.flow.sendReceipt();
+        break;
+      case 'CONFIRM_ORDER':
+        this.flow.thanks();
         break;
       default:
     }
@@ -233,6 +236,54 @@ const messageHandler = send => ({
       )
     },
     sendReceipt() {
+      send(
+        template({
+          "template_type": "receipt",
+          "recipient_name": "Petr Hanák",
+          "order_number": "123456789",
+          "currency": "CZK",
+          "payment_method": "Kreditní karta",
+          "order_url": "http://petersapparel.parseapp.com/order?order_id=123456",
+          "timestamp": "1428444852",
+          "elements": [
+            {
+              "title": "Čistá jablečná nefiltrovaná šťáva",
+              "quantity": 2,
+              "price": 40,
+              "currency": "CZK",
+              "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-c0aacd35-713b-4b7c-964a-31ad1dc7a7b1.jpeg"
+            },
+            {
+              "title": "Grilovaný kuřecí steak v zázvorové omáčce se zeleninou a rýží",
+              "quantity": 1,
+              "price": 140,
+              "currency": "CZK",
+              "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-b39effe1-8d3b-406b-b2ab-f6c299f1cd83.jpeg"
+            },
+          ],
+          "summary": {
+            "total_cost": 220
+          }
+        })
+      );
+      send(
+        template({
+          "template_type": "button",
+          "text": "Potvrdit objednávku?",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Zaplatit",
+              "payload": "CONFIRM_ORDER"
+            }
+          ]
+        })
+      );
+    },
+    thanks() {
+      send(
+        text('Děkuji za objednání.')
+      );
     }
   }
 });
