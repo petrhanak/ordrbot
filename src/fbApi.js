@@ -7,18 +7,17 @@ const typing = require('./response').typing;
 const PAGE_ACCESS_TOKEN = config.get('facebook.pageAccessToken');
 
 const call = (data) => {
-  const json = Object.assign({}, {
-    recipient: {
-      id: event.sender.id
-    }
-  }, data);
 
   return new Promise(resolve =>
     request({
       uri: 'https://graph.facebook.com/v2.6/me/messages',
       qs: { access_token: PAGE_ACCESS_TOKEN },
       method: 'POST',
-      json: json
+      json: Object.assign({}, {
+        recipient: {
+          id: event.sender.id
+        }
+      }, data)
     }, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         const recipientId = body.recipient_id;
