@@ -62,6 +62,7 @@ const messageHandler = send => ({
         send(
           text(`Zapamatoval jsem si tvé údaje. Pro další objednávky proběhne přihlášení automaticky 😉`)
         );
+        this.flow.showMenu();
         break;
       case 'unlinked':
         linkingAccounts.remove(event.sender.id);
