@@ -48,13 +48,15 @@ const call = (data) => {
 const message = (event) => (data, delay) => {
 
   if (delay) {
-    return call(typing.on).then(() =>
-      new Promise(resolve => {
+    return new Promise(resolve => {
+      call(typing.on).then(() => {
         setTimeout(() => {
-          resolve(call(data))
+          call(data).then(() => {
+            resolve()
+          });
         }, delay)
       })
-    )
+    })
   }
 
   return call(data)
