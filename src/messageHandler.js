@@ -53,7 +53,7 @@ const messageHandler = send => ({
         break;
       case 'FINISH_ORDER':
         const basket = order.get(PSID).items;
-        if(basket.length < 1) {
+        if (basket.length < 1) {
           send(
             text(`Prázdný košík znamená prázdné břicho. Něco si vyber.`)
           );
@@ -149,7 +149,7 @@ const messageHandler = send => ({
                 "type": "postback",
                 "payload": "ORDER_ITEM:3"
               }]
-            },{
+            }, {
               "title": "Limonáda Divoženka",
               "image_url": "https://ordrstorageproduction.blob.core.windows.net/food-pictures/Big-55a68cd5-685b-476a-8687-de12e866b6c4.jpeg",
               "buttons": [{
@@ -170,22 +170,24 @@ const messageHandler = send => ({
       )
     },
     listLocations() {
-      template({
-        "template_type":"button",
-        "text":"Kam ti máme jídlo přivézt?",
-        "buttons":[
-          {
-            "type":"postback",
-            "title":"Roháčova 177/7",
-            "payload":"SELECT_LOCATION:Roháčova 177/7"
-          },
-          {
-            "type":"postback",
-            "title":"Rohanské nábřeží 23",
-            "payload":"SELECT_LOCATION:Rohanské nábřeží 23"
-          }
-        ]
-      })
+      send(
+        template({
+          "template_type": "button",
+          "text": "Kam ti máme jídlo přivézt?",
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Roháčova 177/7",
+              "payload": "SELECT_LOCATION:Roháčova 177/7"
+            },
+            {
+              "type": "postback",
+              "title": "Rohanské nábřeží 23",
+              "payload": "SELECT_LOCATION:Rohanské nábřeží 23"
+            }
+          ]
+        })
+      )
     },
     sendReceipt() {
     }
