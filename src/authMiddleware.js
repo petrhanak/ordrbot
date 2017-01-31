@@ -1,3 +1,7 @@
+'use strict';
+
+const request = require('request');
+
 function authMiddleware(req, res) {
   const accountLinkingToken = req.query.account_linking_token;
   const redirectURI = req.query.redirect_uri;
